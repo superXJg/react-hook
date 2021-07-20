@@ -10,7 +10,7 @@
 
 # production
 /build
-
+/__json_server_mock__
 # misc
 .DS_Store
 .env.local
