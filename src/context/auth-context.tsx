@@ -1,5 +1,8 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import * as auth from 'auth-provider'
+import { http } from "utils/http";
+import { useAsync } from "utils/use-async";
+import { FullPageErrorFallback, FullPageLoading } from "components/lib";
 interface AuthForm {
     username: string,
     password: string
@@ -18,12 +21,34 @@ const AuthContext = React.createContext<{
 
 AuthContext.displayName = 'AuthContext';
 
-export const AuthProvider = ({children}: {children: ReactNode}) => {
-    const [user, setUser] = useState<any>(null);
+const bootstrapUser = async () => {
+    let user = null;
+    const token = auth.getToken();
+    if (token) {
+        const data = await http('me', {token});
+        user = data.user
+    }
+    return user
+}
 
-    const login = (form: AuthForm) => auth.login(form).then(setUser);
+export const AuthProvider = ({children}: {children: ReactNode}) => {
+    const {data: user, isLoading, isError, isIdle, run, setData: setUser, error} = useAsync();
+    const login = (form: AuthForm) => auth.login(form).then((res) => {
+        setUser(res);
+    });
     const register = (form: AuthForm) => auth.register(form).then(setUser);
     const logout = () => auth.logout().then(user => setUser(null));
+
+    useEffect(() => {
+        run(bootstrapUser())
+    }, [])
+
+    if (isIdle || isLoading) {
+        return <FullPageLoading />
+    }
+    if (isError) {
+        return <FullPageErrorFallback error={error}/>
+    }
 
     return <AuthContext.Provider children={children} value={{user, login, register, logout}} />
 }
