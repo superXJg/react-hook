@@ -9,6 +9,7 @@ import { useUser } from 'utils/user'
 import { useUrlQueryParam } from 'utils/url'
 import { Button, Row } from 'antd'
 import { useAsync } from 'utils/use-async'
+import { useProjectModal } from './util'
 export interface Project {
     id: string,
     name: string,
@@ -16,11 +17,12 @@ export interface Project {
     pin: boolean,
     organization: string
 }
-export const ProjectList = (props: {setProjectModalOpen: (isOpen: boolean)=> void}) => {
+export const ProjectList = () => {
     // const [, setParams] = useState({
     //     name: '',
     //     personId: ''
     // });
+    const {open} = useProjectModal()
     const [param, setParams] = useUrlQueryParam(['name', 'personId'])
     const debounceParam = useDebounce(param, 200);
     const {isLoading, data: list, retry}= useProjects(debounceParam);
@@ -30,11 +32,11 @@ export const ProjectList = (props: {setProjectModalOpen: (isOpen: boolean)=> voi
         {/* <Button onClick={retry}>retry</Button> */}
         <Row justify='space-between'>
         <h1>项目列表</h1>
-        <Button type='link' onClick={() => props.setProjectModalOpen(true)}>创建项目</Button>
+        <Button type='link' onClick={open}>创建项目</Button>
         </Row>
         
         <SearchPanel param={param} users={users || []} setParams={setParams} />
-        <List retry={retry} setProjectModalOpen={props.setProjectModalOpen} loading={isLoading} users={users || []} dataSource={list || []}></List>
+        <List retry={retry} loading={isLoading} users={users || []} dataSource={list || []}></List>
     </Container>
 }
 

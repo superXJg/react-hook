@@ -6,6 +6,7 @@ import {Pin} from 'components/pin'
 import { render } from "@testing-library/react";
 import { useEditProject } from "utils/project";
 import { ButtonNoPadding } from "components/lib";
+import { useProjectModal } from "./util";
 // {
 //   "id": 1,
 //   "name": "骑手管理",
@@ -23,10 +24,10 @@ export interface Project {
 }
 interface ListProps extends TableProps<Project> {
   users: User[],
-  retry: () => void,
-  setProjectModalOpen: (isOpen: boolean) => void
+  retry: () => void
 }
 export const List = ({users, ...props}: ListProps) => {
+    const {open} = useProjectModal();
     const {mutate} = useEditProject();
     const pinProject = (id: string) => (pin: boolean) => mutate({id, pin}).then(() => props.retry())
     const columns = [
@@ -60,7 +61,7 @@ export const List = ({users, ...props}: ListProps) => {
         render: () => <Dropdown overlay={
           <Menu>
             <Menu.Item key='edit'>
-              <ButtonNoPadding onClick={() => props.setProjectModalOpen(true)} type='link'>编辑</ButtonNoPadding>
+              <ButtonNoPadding onClick={open} type='link'>编辑</ButtonNoPadding>
             </Menu.Item>
           </Menu>
         }>
