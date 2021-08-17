@@ -1,9 +1,5 @@
-// firebase 第三方服务的划  不需要开发者开发
-interface User {
-    name: string,
-    age: number,
-    token: string,
-}
+import { User } from "./types/user";
+
 const apiUrl = process.env.REACT_APP_API_URL;
 const localStorageKey = '__auth_provider_token__';
 

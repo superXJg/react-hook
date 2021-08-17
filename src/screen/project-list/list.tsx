@@ -7,21 +7,7 @@ import { render } from "@testing-library/react";
 import { useEditProject } from "utils/project";
 import { ButtonNoPadding } from "components/lib";
 import { useProjectModal } from "./util";
-// {
-//   "id": 1,
-//   "name": "骑手管理",
-//   "personId": 1,
-//   "organization": "外卖组",
-//   "created": 1604989757139
-// },
-  
-export interface Project {
-  id: any,
-  name: string,
-  personId: string,
-  pin: boolean,
-  organization: string
-}
+import { Project } from "../../types/project";
 interface ListProps extends TableProps<Project> {
   users: User[],
   retry: () => void
