@@ -9,13 +9,12 @@ import { ButtonNoPadding } from "components/lib";
 import { useProjectModal } from "./util";
 import { Project } from "../../types/project";
 interface ListProps extends TableProps<Project> {
-  users: User[],
-  retry: () => void
+  users: User[]
 }
 export const List = ({users, ...props}: ListProps) => {
     const {open} = useProjectModal();
     const {mutate} = useEditProject();
-    const pinProject = (id: string) => (pin: boolean) => mutate({id, pin}).then(() => props.retry())
+    const pinProject = (id: string) => (pin: boolean) => mutate({id, pin})
     const columns = [
       {
         title: <Pin checked={true} disabled={true} />,

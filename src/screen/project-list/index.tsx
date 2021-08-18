@@ -25,7 +25,7 @@ export const ProjectList = () => {
     const {open} = useProjectModal()
     const [param, setParams] = useUrlQueryParam(['name', 'personId'])
     const debounceParam = useDebounce(param, 200);
-    const {isLoading, data: list, retry}= useProjects(debounceParam);
+    const {isLoading, data: list}= useProjects(debounceParam);
     const {data: users} = useUser();
 
     return <Container>
@@ -36,7 +36,7 @@ export const ProjectList = () => {
         </Row>
         
         <SearchPanel param={param} users={users || []} setParams={setParams} />
-        <List retry={retry} loading={isLoading} users={users || []} dataSource={list || []}></List>
+        <List loading={isLoading} users={users || []} dataSource={list || []}></List>
     </Container>
 }
 

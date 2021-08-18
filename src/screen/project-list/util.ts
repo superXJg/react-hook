@@ -1,6 +1,7 @@
 import { stringify } from 'qs';
 import { useMemo } from 'react';
-import {useUrlQueryParam} from 'utils/url'// 项目列表搜索的参数
+import { useProject } from 'utils/project';
+import {useSetUrlSearchParam, useUrlQueryParam} from 'utils/url'// 项目列表搜索的参数
 
 export const useProjectsSearchParams = () => {
   interface Temp {
@@ -22,13 +23,20 @@ export const useProjectModal = () => {
   const [{ projectCreate }, setProjectCreate] = useUrlQueryParam([
     "projectCreate",
   ]);
-
+  const [{ editingProjectId }, setEditingProjectId] = useUrlQueryParam([
+    "editingProjectId",
+  ]);
+  const setUrlParams = useSetUrlSearchParam();
   const open = () => setProjectCreate({ projectCreate: true });
   const close = () => setProjectCreate({  projectCreate: false });
-
+  const { data: editingProject, isLoading } = useProject(
+    Number(editingProjectId)
+  );
   return {
     projectModalOpen: projectCreate === "true",
     open,
-    close
+    close,
+    isLoading,
+    editingProject
   }
 };

@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import logo from 'asset/logo.svg';
 import left from 'asset/left.svg';
 import right from 'asset/right.svg';
+import { ErrorBox } from "components/lib";
 export const Unauthenticated = () => {
     const [isRegister, setIsRegister] = useState(false);
     const [error, setError] = useState<Error | null>(null)
@@ -16,7 +17,8 @@ export const Unauthenticated = () => {
             <Title>
             {isRegister ? '请注册' : '请登录'}        
             </Title>
-            {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null}
+            <ErrorBox error={error} />
+            {/* {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null} */}
             {isRegister ? <RegisterScreen onError={setError}/> : <LoginScreen onError={setError} />}
             <Divider />
             <a onClick={() => setIsRegister(!isRegister)}>切换到{isRegister ? '已经有账号了登录': '没有账号？注册新账号'}</a>
