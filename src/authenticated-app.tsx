@@ -13,6 +13,7 @@ import { ProjectModal } from 'screen/project-list/project-modal'
 import { ProjectPopover } from "components/project-popover";
 import { useProjectModal } from "screen/project-list/util";
 export const Authenticated = () => {
+    console.log('12333')
     return <Container>
         <Router>
             <PageHeader/>

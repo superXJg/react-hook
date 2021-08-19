@@ -15,28 +15,28 @@ export const ProjectModal = () => {
     editingProject,
     isLoading,
   } = useProjectModal();
-  
-  const useMutateProject = editingProject ? useEditProject : useAddProject;
+  console.log('xxxxxxxxxx')
+//   const useMutateProject = editingProject ? useEditProject : useAddProject;
 
-  const { mutateAsync, error, isLoading: mutateLoading } = useMutateProject(
-  );
+//   const { mutateAsync, error, isLoading: mutateLoading } = useMutateProject(
+//   );
   const [form] = Form.useForm();
   const onFinish = (values: any) => {
-    mutateAsync({ ...editingProject, ...values }).then(() => {
-      form.resetFields();
-      close();
-    });
+    // mutateAsync({ ...editingProject, ...values }).then(() => {
+    //   form.resetFields();
+    //   close();
+    // });
   };
   const closeModal = () => {
     form.resetFields();
-    close();
+    // close();
   };
 
-  const title = editingProject ? "编辑项目" : "创建项目";
+//   const title = editingProject ? "编辑项目" : "创建项目";
 
-  useEffect(() => {
-    form.setFieldsValue(editingProject);
-  }, [editingProject, form]);
+//   useEffect(() => {
+//     form.setFieldsValue(editingProject);
+//   }, [editingProject, form]);
 
   return (
     <Drawer
@@ -46,7 +46,8 @@ export const ProjectModal = () => {
       width={"100%"}
     >
       <Container>
-        {isLoading ? (
+          xxxxx
+        {/* {isLoading ? (
           <Spin size={"large"} />
         ) : (
           <>
@@ -89,7 +90,7 @@ export const ProjectModal = () => {
               </Form.Item>
             </Form>
           </>
-        )}
+        )} */}
       </Container>
     </Drawer>
   );

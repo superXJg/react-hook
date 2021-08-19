@@ -26,7 +26,16 @@ export const useProjectModal = () => {
   const { data: editingProject, isLoading } = useProject(
     Number(editingProjectId)
   );
-
+  // const editingProject = {
+  //   created: '1604989757139',
+  //   id: 1,
+  //   name: "快递管理",
+  //   organization: "快递组",
+  //   ownerId: 2088053510,
+  //   personId: 4,
+  //   pin: true
+  // }
+  
   const open = () => setProjectCreate({ projectCreate: true });
   const close = () => setUrlParams({ projectCreate: "", editingProjectId: "" });
   const startEdit = (id: number) =>
