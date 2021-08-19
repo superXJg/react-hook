@@ -13,7 +13,6 @@ import { ProjectModal } from 'screen/project-list/project-modal'
 import { ProjectPopover } from "components/project-popover";
 import { useProjectModal } from "screen/project-list/util";
 export const Authenticated = () => {
-    const [projectModalOpen, setProjectModalOpen] = useState(false)
     return <Container>
         <Router>
             <PageHeader/>

@@ -11,7 +11,7 @@ import { Button, Row } from 'antd'
 import { useAsync } from 'utils/use-async'
 import { useProjectModal } from './util'
 export interface Project {
-    id: string,
+    id: any,
     name: string,
     personId: string,
     pin: boolean,

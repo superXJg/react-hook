@@ -21,7 +21,6 @@ export const ProjectPopover = (() => {
         <Button onClick={open} type={'link'}>创建项目</Button>
     </Container>
     return <Popover placement={'bottom'} content={content}>
-        项目
     </Popover>
 })
 
